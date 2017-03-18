@@ -4,14 +4,17 @@ using System.Collections;
 public class Player : MonoBehaviour {
 	public Rigidbody2D rb;
 	public float temperature = -273.0f;
-	public bool isSupra = false;
+	public bool isSupra = true;
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
+		if (Input.GetKeyDown (KeyCode.S))
+			isSupra = !isSupra;
 		if (temperature < 0.0f)
 			temperature += Time.deltaTime;
 		if (Input.GetKey (KeyCode.UpArrow))
