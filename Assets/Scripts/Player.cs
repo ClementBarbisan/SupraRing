@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 	public Rigidbody2D rb;
@@ -12,10 +13,13 @@ public class Player : MonoBehaviour {
 	public float criticalTemperature = 93f;
 	public bool isCharged = false;
 	public bool isSupra = true;
+	public Slider sliderTemperature;
+	public RectTransform rectangle;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
+		sliderTemperature.interactable = false;
 	}
 	
 	// Update is called once per frame
@@ -25,9 +29,15 @@ public class Player : MonoBehaviour {
 		if (isCharged && !isSupra)
 			isCharged = false;
 		if (temperature < criticalTemperature)
+		{
 			isSupra = true;
+			rectangle.GetComponent<Image> ().color = Color.white;
+		}
 		else
+		{
+			rectangle.GetComponent<Image> ().color = Color.red;
 			isSupra = false;
+		}
 		if (Input.GetKeyDown (KeyCode.S))
 			isSupra = !isSupra;
 		
@@ -68,6 +78,7 @@ public class Player : MonoBehaviour {
 		}
 		// Compute the current temperature
 		temperature = temperature + Time.deltaTime * ( alpha * (ambientTemperature - temperature) + currentHeaterPower ) ;
+		sliderTemperature.value = temperature / 300f;
 	}
 
 }
