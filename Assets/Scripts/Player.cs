@@ -22,6 +22,8 @@ public class Player : MonoBehaviour {
 	void Update () 
 	{
 		UpdateTemp ();
+		if (isCharged && !isSupra)
+			isCharged = false;
 		if (temperature < criticalTemperature)
 			isSupra = true;
 		else
