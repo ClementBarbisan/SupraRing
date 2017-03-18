@@ -47,27 +47,27 @@ public class Player : MonoBehaviour {
 		
 		if (Input.GetKey (KeyCode.UpArrow))
 		{
-			transform.Translate (transform.up * Time.deltaTime * speed);
+//			transform.Translate (transform.up * Time.deltaTime * speed);
 //			rb.velocity = transform.up;
-//			rb.AddForce (transform.up * speed);
+			rb.AddForce (transform.up * speed);
 		}
 		if (Input.GetKey (KeyCode.DownArrow))
 		{
-			transform.Translate (-transform.up * Time.deltaTime * speed);
+//			transform.Translate (-transform.up * Time.deltaTime * speed);
 //			rb.velocity = -transform.up;
-//			rb.AddForce (-transform.up * speed);
+			rb.AddForce (-transform.up * speed);
 		}
 		if (Input.GetKey (KeyCode.LeftArrow))
 		{
-			transform.Translate (-transform.right * Time.deltaTime * speed);
+//			transform.Translate (-transform.right * Time.deltaTime * speed);
 //			rb.velocity = -transform.right;
-//			rb.AddForce (-transform.right * speed);
+			rb.AddForce (-transform.right * speed);
 		}
 		if (Input.GetKey (KeyCode.RightArrow))
 		{
-			transform.Translate (transform.right * Time.deltaTime * speed);
+//			transform.Translate (transform.right * Time.deltaTime * speed);
 //			rb.velocity = transform.right;
-//			rb.AddForce (transform.right * speed);
+			rb.AddForce (transform.right * speed);
 		}
 	}
 
