@@ -17,8 +17,10 @@ public class MagnetismField : MonoBehaviour {
 		if (other.GetComponent<Player> () && other.GetComponent<Player>().isSupra)
 		{
 			Player user = other.GetComponent<Player> ();
-			RaycastHit2D hit = Physics2D.Raycast(user.gameObject.transform.position, user.gameObject.transform.position - transform.position);
-			user.rb.velocity += new Vector2(user.gameObject.transform.position.x - hit.point.x, user.gameObject.transform.position.y - hit.point.y);
+			RaycastHit2D hit = Physics2D.Raycast(user.gameObject.transform.position, transform.position - user.gameObject.transform.position);
+			Vector2 direction = (transform.position - user.gameObject.transform.position).normalized;
+			float magnitude = Mathf.Clamp(1.0f / Mathf.Pow(hit.distance, 2), 0.0f, 100f);
+			user.rb.velocity -= magnitude * direction;
 		}
 	}
 }
