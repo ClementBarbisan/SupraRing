@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class MagnetismField : MonoBehaviour {
-
+	public float quotient = 0.1f;
 	// Use this for initialization
 	void Start () {
 	
@@ -14,13 +14,13 @@ public class MagnetismField : MonoBehaviour {
 	}
 	void OnTriggerStay2D(Collider2D other)
 	{
-		if (other.GetComponent<Player> () && other.GetComponent<Player>().isSupra)
+		if (other.GetComponent<Player> () && other.GetComponent<Player>().isSupra && other.GetComponent<Player>().isCharged)
 		{
 			Player user = other.GetComponent<Player> ();
 			RaycastHit2D hit = Physics2D.Raycast(user.gameObject.transform.position, transform.position - user.gameObject.transform.position);
 			Vector2 direction = (transform.position - user.gameObject.transform.position).normalized;
 			float magnitude = Mathf.Clamp(1.0f / Mathf.Pow(hit.distance, 2), 0.0f, 100f);
-			user.rb.velocity -= magnitude * direction;
+			user.rb.velocity -= magnitude * direction * quotient;
 		}
 	}
 }

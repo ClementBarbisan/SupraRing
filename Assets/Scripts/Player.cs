@@ -62,7 +62,6 @@ public class Player : MonoBehaviour {
 //			rb.velocity = transform.right;
 			rb.AddForce (transform.right * 10);
 		}
-
 	}
 
 	// This function updates the character's temperature
