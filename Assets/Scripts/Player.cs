@@ -4,8 +4,9 @@ using System.Collections;
 public class Player : MonoBehaviour {
 	public Rigidbody2D rb;
 
-	// Thermal properties
-	public float temperature = 77.0f ;
+    // Thermal properties
+    private float previousTemperature ;
+    public float currentTemperature = 77.0f ;
 	public float ambientTemperature = 300.0f ;
 	private float alpha       = 0.1f  ;
 	private float heaterPower = 1.0f  ;
@@ -15,20 +16,30 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        // Set the previous temperature
+        previousTemperature = currentTemperature ;
 		rb = GetComponent<Rigidbody2D> ();
+        // Set the initial color of the sprite
+        GetComponent<SpriteRenderer>().color = Color.cyan;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		UpdateTemp ();
-		if (isCharged && !isSupra)
-			isCharged = false;
-		if (temperature < criticalTemperature)
-			isSupra = true;
-		else
-			isSupra = false;
-		if (Input.GetKeyDown (KeyCode.S))
+        // Update the player's temperature
+        UpdateTemperature();
+
+        // Handle the superconducting / normal transition
+        SuperconductingTransition();
+
+        // Lose the charge if not superconducting anymore
+        if ( isCharged && !isSupra )
+        {
+            isCharged = false;
+            GetComponent<SpriteRenderer>().color = Color.red;
+        }
+
+        if (Input.GetKeyDown (KeyCode.S))
 			isSupra = !isSupra;
 		
 		if (Input.GetKey (KeyCode.UpArrow))
@@ -55,7 +66,7 @@ public class Player : MonoBehaviour {
 	}
 
 	// This function updates the character's temperature
-	void UpdateTemp()
+	void UpdateTemperature()
 	{
 		// Current heater power
 		float currentHeaterPower ;
@@ -66,8 +77,28 @@ public class Player : MonoBehaviour {
 		} else {
 			currentHeaterPower = 0.0f ;
 		}
+        previousTemperature = currentTemperature ;
 		// Compute the current temperature
-		temperature = temperature + Time.deltaTime * ( alpha * (ambientTemperature - temperature) + currentHeaterPower ) ;
+		currentTemperature = previousTemperature + Time.deltaTime * 
+                             ( alpha * (ambientTemperature - previousTemperature) + currentHeaterPower ) ;
 	}
 
+    // This function canges the superconducting state based on the player's temperature
+    void SuperconductingTransition()
+    {
+        if ((currentTemperature <= criticalTemperature) &&
+             (previousTemperature > criticalTemperature))
+        {
+            // Become superconducting
+            isSupra = true;
+            GetComponent<SpriteRenderer>().color = Color.cyan;
+        }
+        else if ((currentTemperature >= criticalTemperature) &&
+                  (previousTemperature < criticalTemperature))
+        {
+            // Become normal
+            isSupra = false;
+            GetComponent<SpriteRenderer>().color = Color.red;
+        }
+    }
 }
