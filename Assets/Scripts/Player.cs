@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 	public Rigidbody2D rb;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour {
 	public float criticalTemperature = 93f;
 	public bool isCharged = false;
 	public bool isSupra = true;
+	public Slider sliderTemperature;
 
 	// Use this for initialization
 	void Start () {
@@ -81,6 +83,7 @@ public class Player : MonoBehaviour {
 		// Compute the current temperature
 		currentTemperature = previousTemperature + Time.deltaTime * 
                              ( alpha * (ambientTemperature - previousTemperature) + currentHeaterPower ) ;
+		sliderTemperature.value = currentTemperature / 300f;
 	}
 
     // This function canges the superconducting state based on the player's temperature
