@@ -9,11 +9,12 @@ public class Fridge : MonoBehaviour {
 	// the player recieves the charge
 	void Update () 
 	{
-		if ( Input.GetKeyDown(KeyCode.E) && playerInside )
+		if ( Input.GetKeyDown(KeyCode.E) && playerInside)
 		{
 			currentPlayer.currentTemperature = 20f ;
 			currentPlayer.isSupra = true;
-			currentPlayer.GetComponent<SpriteRenderer>().color = Color.cyan;
+			if (!currentPlayer.isCharged)
+				currentPlayer.GetComponent<SpriteRenderer>().color = Color.cyan;
 		}
 	}
 
