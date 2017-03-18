@@ -16,6 +16,6 @@ public class TemperatureZone : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.GetComponent<Player> ())
-			other.GetComponent<Player> ().ambiantTemperature = currentTemperature;
+			other.GetComponent<Player> ().ambientTemperature = currentTemperature;
 	}
 }
