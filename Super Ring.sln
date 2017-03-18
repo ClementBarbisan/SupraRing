@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{A3B95774-65C2-17D8-D2C1-E44EB5BE53DF}") = "Super Ring", "Assembly-CSharp.csproj", "{1CB0770A-A013-26A2-AD23-D127C68BF116}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CB0770A-A013-26A2-AD23-D127C68BF116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CB0770A-A013-26A2-AD23-D127C68BF116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CB0770A-A013-26A2-AD23-D127C68BF116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CB0770A-A013-26A2-AD23-D127C68BF116}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
