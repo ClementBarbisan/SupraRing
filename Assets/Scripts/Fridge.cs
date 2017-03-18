@@ -12,6 +12,8 @@ public class Fridge : MonoBehaviour {
 		if ( Input.GetKeyDown(KeyCode.E) && playerInside )
 		{
 			currentPlayer.currentTemperature = 20f ;
+			currentPlayer.isSupra = true;
+			currentPlayer.GetComponent<SpriteRenderer>().color = Color.cyan;
 		}
 	}
 
