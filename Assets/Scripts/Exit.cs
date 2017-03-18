@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class Exit : MonoBehaviour {
 	public string sceneName;
+	private bool isInsideAndCharged = false;
+	private Player currentPlayer;
 	// Use this for initialization
 	void Start () {
 	
@@ -11,7 +13,12 @@ public class Exit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (Input.GetKeyDown (KeyCode.E) && isInsideAndCharged)
+		{
+			currentPlayer.isCharged = false;
+			StartCoroutine (LoadNextScene ());
+		}
+
 	}
 
 	IEnumerator LoadNextScene()
@@ -20,12 +27,20 @@ public class Exit : MonoBehaviour {
 		SceneManager.LoadScene (sceneName);
 	}
 
-	void OnTriggerStay2D(Collider2D other)
+	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (Input.GetKeyDown (KeyCode.E) && other.GetComponent<Player> () && other.GetComponent<Player> ().isCharged)
+		if (other.GetComponent<Player> () && other.GetComponent<Player> ().isCharged)
 		{
-			other.GetComponent<Player> ().isCharged = false;
-			StartCoroutine (LoadNextScene());
+			isInsideAndCharged = true;
+			currentPlayer = other.GetComponent<Player> ();
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.GetComponent<Player> ())
+		{
+			isInsideAndCharged = false;
 		}
 	}
 }
