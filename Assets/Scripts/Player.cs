@@ -8,7 +8,8 @@ public class Player : MonoBehaviour {
     private float previousTemperature ;
     public float currentTemperature = 77.0f ;
 	public float ambientTemperature = 300.0f ;
-	private float alpha       = 0.1f  ;
+	public float alpha       = 0.1f  ;
+	public float speed		= 10f;
 	private float heaterPower = 1.0f  ;
 	public float criticalTemperature = 93f;
 	public bool isCharged = false;
@@ -45,22 +46,22 @@ public class Player : MonoBehaviour {
 		if (Input.GetKey (KeyCode.UpArrow))
 		{
 //			rb.velocity = transform.up;
-			rb.AddForce (transform.up * 10);
+			rb.AddForce (transform.up * speed);
 		}
 		if (Input.GetKey (KeyCode.DownArrow))
 		{
 //			rb.velocity = -transform.up;
-			rb.AddForce (-transform.up * 10);
+			rb.AddForce (-transform.up * speed);
 		}
 		if (Input.GetKey (KeyCode.LeftArrow))
 		{
 //			rb.velocity = -transform.right;
-			rb.AddForce (-transform.right * 10);
+			rb.AddForce (-transform.right * speed);
 		}
 		if (Input.GetKey (KeyCode.RightArrow))
 		{
 //			rb.velocity = transform.right;
-			rb.AddForce (transform.right * 10);
+			rb.AddForce (transform.right * speed);
 		}
 	}
 
