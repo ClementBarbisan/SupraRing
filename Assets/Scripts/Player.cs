@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
 	private float alpha       = 0.1f  ;
 	private float heaterPower = 1.0f  ;
 	public float criticalTemperature = 93f;
-
+	public bool isCharged = false;
 	public bool isSupra = true;
 
 	// Use this for initialization
@@ -32,22 +32,22 @@ public class Player : MonoBehaviour {
 		if (Input.GetKey (KeyCode.UpArrow))
 		{
 //			rb.velocity = transform.up;
-			rb.AddForce (transform.up * 10);
+			rb.AddForce (transform.up);
 		}
 		if (Input.GetKey (KeyCode.DownArrow))
 		{
 //			rb.velocity = -transform.up;
-			rb.AddForce (-transform.up * 10);
+			rb.AddForce (-transform.up);
 		}
 		if (Input.GetKey (KeyCode.LeftArrow))
 		{
 //			rb.velocity = -transform.right;
-			rb.AddForce (-transform.right * 10);
+			rb.AddForce (-transform.right);
 		}
 		if (Input.GetKey (KeyCode.RightArrow))
 		{
 //			rb.velocity = transform.right;
-			rb.AddForce (transform.right * 10);
+			rb.AddForce (transform.right);
 		}
 
 	}
