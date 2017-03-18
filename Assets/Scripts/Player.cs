@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
 	public float ambientTemperature = 300.0f ;
 	private float alpha       = 0.1f  ;
 	private float heaterPower = 1.0f  ;
+	public float criticalTemperature = 93f;
 
 	public bool isSupra = true;
 
@@ -21,7 +22,10 @@ public class Player : MonoBehaviour {
 	void Update () 
 	{
 		UpdateTemp ();
-
+		if (temperature < criticalTemperature)
+			isSupra = true;
+		else
+			isSupra = false;
 		if (Input.GetKeyDown (KeyCode.S))
 			isSupra = !isSupra;
 		
