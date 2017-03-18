@@ -45,22 +45,22 @@ public class Player : MonoBehaviour {
 		if (Input.GetKey (KeyCode.UpArrow))
 		{
 //			rb.velocity = transform.up;
-			rb.AddForce (transform.up);
+			rb.AddForce (transform.up * 10);
 		}
 		if (Input.GetKey (KeyCode.DownArrow))
 		{
 //			rb.velocity = -transform.up;
-			rb.AddForce (-transform.up);
+			rb.AddForce (-transform.up * 10);
 		}
 		if (Input.GetKey (KeyCode.LeftArrow))
 		{
 //			rb.velocity = -transform.right;
-			rb.AddForce (-transform.right);
+			rb.AddForce (-transform.right * 10);
 		}
 		if (Input.GetKey (KeyCode.RightArrow))
 		{
 //			rb.velocity = transform.right;
-			rb.AddForce (transform.right);
+			rb.AddForce (transform.right * 10);
 		}
 
 	}
