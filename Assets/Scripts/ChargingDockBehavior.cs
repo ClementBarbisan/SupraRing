@@ -14,12 +14,14 @@ public class ChargingDockBehavior : MonoBehaviour {
 	// Checks if the player presses "E" while on the dock, in that case
     // the player recieves the charge
 	void Update () {
-		if ( Input.GetKey(KeyCode.E) && playerInside )
+		if ( Input.GetKey(KeyCode.E) && playerInside && !currentPlayer.isCharged )
         {
             // Set the player to be charged
             currentPlayer.isCharged = true ;
             // Edit its appearance
             currentPlayer.GetComponent<SpriteRenderer>().color = Color.yellow ;
+            // Play the corrsponding sound
+            GetComponent<AudioSource>().Play() ;
         }
 	}
 
