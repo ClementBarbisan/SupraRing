@@ -16,6 +16,8 @@ public class Player : MonoBehaviour {
 	public bool isCharged = false;
 	public bool isSupra = true;
 	public Slider sliderTemperature;
+	private Animator anim;
+	private Vector3 localScale;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +26,8 @@ public class Player : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D> ();
         // Set the initial color of the sprite
         GetComponent<SpriteRenderer>().color = Color.cyan;
+		anim = GetComponent<Animator> ();
+		localScale = transform.localScale;
 	}
 	
 	// Update is called once per frame
@@ -62,12 +66,20 @@ public class Player : MonoBehaviour {
 //			transform.Translate (-transform.right * Time.deltaTime * speed);
 //			rb.velocity = -transform.right;
 			rb.AddForce (-transform.right * speed);
+			anim.SetBool ("left", true);
+			anim.SetBool ("right", false);
+			transform.localScale = new Vector3 (-localScale.x, localScale.y, localScale.z);
+			anim.speed = Mathf.Abs(rb.velocity.x);
 		}
 		if (Input.GetKey (KeyCode.RightArrow))
 		{
 //			transform.Translate (transform.right * Time.deltaTime * speed);
 //			rb.velocity = transform.right;
 			rb.AddForce (transform.right * speed);
+			anim.SetBool ("left", false);
+			anim.SetBool ("right", true);
+			transform.localScale = localScale;
+			anim.speed = Mathf.Abs(rb.velocity.x);
 		}
 	}
 
