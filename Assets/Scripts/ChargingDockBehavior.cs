@@ -8,10 +8,22 @@ public class ChargingDockBehavior : MonoBehaviour {
     //  - currentPlayer = Player in the charging dock
     //  - playerInside  = Boolean set to true when a player
     //                    is in the dock
-    Player currentPlayer ;
-    bool playerInside ;
 
-	// Checks if the player presses "E" while on the dock, in that case
+    private Player currentPlayer ;
+    private bool playerInside ;
+    
+    private AudioSource audioSource ;
+    private AudioClip soundEffect ;
+
+    // This function is called on startup
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>() ;
+        soundEffect = audioSource.clip ;
+    }
+
+
+    // Checks if the player presses "E" while on the dock, in that case
     // the player recieves the charge
 	void Update () {
 		if ( Input.GetKey(KeyCode.E) && playerInside && !currentPlayer.isCharged )
@@ -20,8 +32,11 @@ public class ChargingDockBehavior : MonoBehaviour {
             currentPlayer.isCharged = true ;
             // Edit its appearance
             currentPlayer.GetComponent<SpriteRenderer>().color = Color.yellow ;
-            // Play the corrsponding sound
-            GetComponent<AudioSource>().Play() ;
+            // Play the corresponding sound
+            if ( !audioSource.isPlaying )
+            {
+                audioSource.PlayOneShot(soundEffect, 1.0f) ;
+            }
         }
 	}
 

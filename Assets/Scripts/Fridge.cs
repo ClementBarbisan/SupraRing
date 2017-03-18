@@ -5,16 +5,30 @@ public class Fridge : MonoBehaviour {
 	Player currentPlayer ;
 	bool playerInside ;
 
-	// Checks if the player presses "E" while on the dock, in that case
-	// the player recieves the charge
-	void Update () 
+    private AudioSource ambientAudio ;
+    private AudioSource activeAudio ;
+    public AudioClip coolingDockAmbient ;
+    public AudioClip coolingDown ;
+
+    private void Awake()
+    {
+        activeAudio = AddAudio(coolingDown, false, false, 1.0f) ;
+    }
+
+    // Checks if the player presses "E" while on the dock, in that case
+    // the player recieves the charge
+    void Update () 
 	{
 		if ( Input.GetKeyDown(KeyCode.E) && playerInside)
 		{
 			currentPlayer.currentTemperature = 20f ;
 			currentPlayer.isSupra = true;
-			if (!currentPlayer.isCharged)
+			if ( !currentPlayer.isCharged )
 				currentPlayer.GetComponent<SpriteRenderer>().color = Color.cyan;
+            if ( !activeAudio.isPlaying )
+            {
+                activeAudio.PlayOneShot(coolingDown, 1.0f);
+            }
 		}
 	}
 
@@ -36,4 +50,15 @@ public class Fridge : MonoBehaviour {
 			playerInside = false;
 		}
 	}
+
+    // Add audio sources to the component
+    public AudioSource AddAudio(AudioClip clip, bool loop, bool playAwake, float vol)
+    {
+        AudioSource newAudio = gameObject.AddComponent<AudioSource>();
+        newAudio.clip = clip ; 
+        newAudio.loop = loop ;
+        newAudio.playOnAwake = playAwake ;
+        newAudio.volume = vol ; 
+        return newAudio ; 
+    }
 }
