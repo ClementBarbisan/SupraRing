@@ -6,17 +6,25 @@ public class Exit : MonoBehaviour {
 	public string sceneName;
 	private bool isInsideAndCharged = false;
 	private Player currentPlayer;
+
+    private AudioSource audioSource ;
+    private AudioClip activeSound ;
 	// Use this for initialization
 	void Start () {
-	
+        audioSource = GetComponent<AudioSource>() ;
+        activeSound = audioSource.clip ;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.E) && isInsideAndCharged)
 		{
-			currentPlayer.isCharged = false;
-			StartCoroutine (LoadNextScene ());
+			currentPlayer.isCharged = false ;
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(activeSound, 0.8f) ;
+            }
+			StartCoroutine (LoadNextScene ()) ;
 		}
 
 	}

@@ -51,20 +51,20 @@ public class Player : MonoBehaviour {
 		
 		if (Input.GetKey (KeyCode.UpArrow))
 		{
-//			transform.Translate (transform.up * Time.deltaTime * speed);
-//			rb.velocity = transform.up;
+			transform.Translate (transform.up * Time.deltaTime * speed);
+			rb.velocity = transform.up;
 			rb.AddForce (transform.up * speed);
 		}
 		if (Input.GetKey (KeyCode.DownArrow))
 		{
-//			transform.Translate (-transform.up * Time.deltaTime * speed);
-//			rb.velocity = -transform.up;
+			transform.Translate (-transform.up * Time.deltaTime * speed);
+			rb.velocity = -transform.up;
 			rb.AddForce (-transform.up * speed);
 		}
 		if (Input.GetKey (KeyCode.LeftArrow))
 		{
-//			transform.Translate (-transform.right * Time.deltaTime * speed);
-//			rb.velocity = -transform.right;
+			transform.Translate (-transform.right * Time.deltaTime * speed);
+			rb.velocity = -transform.right;
 			rb.AddForce (-transform.right * speed);
 			anim.SetBool ("left", true);
 			anim.SetBool ("right", false);
@@ -73,8 +73,8 @@ public class Player : MonoBehaviour {
 		}
 		if (Input.GetKey (KeyCode.RightArrow))
 		{
-//			transform.Translate (transform.right * Time.deltaTime * speed);
-//			rb.velocity = transform.right;
+			transform.Translate (transform.right * Time.deltaTime * speed);
+			rb.velocity = transform.right;
 			rb.AddForce (transform.right * speed);
 			anim.SetBool ("left", false);
 			anim.SetBool ("right", true);
@@ -102,7 +102,7 @@ public class Player : MonoBehaviour {
 		sliderTemperature.value = currentTemperature / 300f;
 	}
 
-    // This function canges the superconducting state based on the player's temperature
+    // This function changes the superconducting state based on the player's temperature
     void SuperconductingTransition()
     {
         if ((currentTemperature <= criticalTemperature) &&
