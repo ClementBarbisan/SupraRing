@@ -25,7 +25,7 @@ public class Player : MonoBehaviour {
         previousTemperature = currentTemperature ;
 		rb = GetComponent<Rigidbody2D> ();
         // Set the initial color of the sprite
-        GetComponent<SpriteRenderer>().color = Color.cyan;
+//        GetComponent<SpriteRenderer>().color = Color.red;
 		anim = GetComponent<Animator> ();
 		localScale = transform.localScale;
 	}
@@ -35,7 +35,10 @@ public class Player : MonoBehaviour {
 	{
         // Update the player's temperature
         UpdateTemperature();
-
+		if (!isSupra)
+			anim.SetBool ("isSupra", false);
+		if (!isCharged)
+			anim.SetBool ("isCharged", false);
         // Handle the superconducting / normal transition
         SuperconductingTransition();
 
@@ -43,7 +46,7 @@ public class Player : MonoBehaviour {
         if ( isCharged && !isSupra )
         {
             isCharged = false;
-            GetComponent<SpriteRenderer>().color = Color.red;
+//            GetComponent<SpriteRenderer>().color = Color.red;
         }
 
         if (Input.GetKeyDown (KeyCode.S))
@@ -54,32 +57,55 @@ public class Player : MonoBehaviour {
 			transform.Translate (transform.up * Time.deltaTime * speed);
 			rb.velocity = transform.up;
 			rb.AddForce (transform.up * speed);
+			if (isCharged)
+				anim.SetBool ("isCharged", true);
+			if (isSupra)
+				anim.SetBool ("isSupra", true);
+			anim.SetBool ("move", true);
+			anim.speed = Mathf.Abs(rb.velocity.y * speed);
 		}
 		if (Input.GetKey (KeyCode.DownArrow))
 		{
 			transform.Translate (-transform.up * Time.deltaTime * speed);
 			rb.velocity = -transform.up;
 			rb.AddForce (-transform.up * speed);
+			if (isCharged)
+				anim.SetBool ("isCharged", true);
+			if (isSupra)
+				anim.SetBool ("isSupra", true);
+			anim.SetBool ("move", true);
+			anim.speed = Mathf.Abs(rb.velocity.y * speed);
 		}
 		if (Input.GetKey (KeyCode.LeftArrow))
 		{
 			transform.Translate (-transform.right * Time.deltaTime * speed);
 			rb.velocity = -transform.right;
 			rb.AddForce (-transform.right * speed);
-			anim.SetBool ("left", true);
-			anim.SetBool ("right", false);
+			if (isCharged)
+				anim.SetBool ("isCharged", true);
+			if (isSupra)
+				anim.SetBool ("isSupra", true);
+			anim.SetBool ("move", true);
 			transform.localScale = new Vector3 (-localScale.x, localScale.y, localScale.z);
-			anim.speed = Mathf.Abs(rb.velocity.x);
+			anim.speed = Mathf.Abs(rb.velocity.x * speed);
 		}
 		if (Input.GetKey (KeyCode.RightArrow))
 		{
 			transform.Translate (transform.right * Time.deltaTime * speed);
 			rb.velocity = transform.right;
 			rb.AddForce (transform.right * speed);
-			anim.SetBool ("left", false);
-			anim.SetBool ("right", true);
+			if (isCharged)
+				anim.SetBool ("isCharged", true);
+			if (isSupra)
+				anim.SetBool ("isSupra", true);
+			anim.SetBool ("move", true);
 			transform.localScale = localScale;
-			anim.speed = Mathf.Abs(rb.velocity.x);
+			anim.speed = Mathf.Abs(rb.velocity.x * speed);
+		}
+		if (!Input.GetKey (KeyCode.RightArrow) && !Input.GetKey (KeyCode.LeftArrow) && !Input.GetKey (KeyCode.UpArrow) && !Input.GetKey (KeyCode.DownArrow))
+		{
+			anim.speed = 1f;
+			anim.SetBool ("move", false);
 		}
 	}
 
@@ -110,14 +136,14 @@ public class Player : MonoBehaviour {
         {
             // Become superconducting
             isSupra = true;
-            GetComponent<SpriteRenderer>().color = Color.cyan;
+//            GetComponent<SpriteRenderer>().color = Color.cyan;
         }
         else if ((currentTemperature >= criticalTemperature) &&
                   (previousTemperature < criticalTemperature))
         {
             // Become normal
             isSupra = false;
-            GetComponent<SpriteRenderer>().color = Color.red;
+//            GetComponent<SpriteRenderer>().color = Color.red;
         }
     }
 }

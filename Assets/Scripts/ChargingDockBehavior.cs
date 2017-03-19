@@ -31,7 +31,7 @@ public class ChargingDockBehavior : MonoBehaviour {
             // Set the player to be charged
             currentPlayer.isCharged = true ;
             // Edit its appearance
-            currentPlayer.GetComponent<SpriteRenderer>().color = Color.yellow ;
+//            currentPlayer.GetComponent<SpriteRenderer>().color = Color.yellow ;
             // Play the corresponding sound
             if ( !audioSource.isPlaying )
             {
