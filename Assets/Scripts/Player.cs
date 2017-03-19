@@ -19,6 +19,8 @@ public class Player : MonoBehaviour {
 	public RectTransform fill;
 	private Animator anim;
 	private Vector3 localScale;
+	public AudioClip[] musics;
+	private AudioSource source;
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +31,9 @@ public class Player : MonoBehaviour {
 //        GetComponent<SpriteRenderer>().color = Color.red;
 		anim = GetComponent<Animator> ();
 		localScale = transform.localScale;
+		source = GetComponent<AudioSource> ();
+		source.clip = musics [Random.Range (0, 2)];
+		source.Play ();
 	}
 	
 	// Update is called once per frame
