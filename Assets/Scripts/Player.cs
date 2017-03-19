@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
 	public bool isCharged = false;
 	public bool isSupra = true;
 	public Slider sliderTemperature;
+	public RectTransform fill;
 	private Animator anim;
 	private Vector3 localScale;
 
@@ -171,6 +172,10 @@ public class Player : MonoBehaviour {
 		currentTemperature = previousTemperature + Time.deltaTime * 
                              ( alpha * (ambientTemperature - previousTemperature) + currentHeaterPower ) ;
 		sliderTemperature.value = currentTemperature / 300f;
+		if (sliderTemperature.value > 0.31)
+			fill.GetComponent<Image> ().color = Color.red;
+		else
+			fill.GetComponent<Image> ().color = Color.blue;
 	}
 
     // This function changes the superconducting state based on the player's temperature
