@@ -49,13 +49,37 @@ public class Player : MonoBehaviour {
 //            GetComponent<SpriteRenderer>().color = Color.red;
         }
 
-        if (Input.GetKeyDown (KeyCode.S))
-			isSupra = !isSupra;
-		
+//        if (Input.GetKeyDown (KeyCode.S))
+//			isSupra = !isSupra;
+		if (Input.GetAxis ("Vertical") != 0.0f)
+		{
+//			transform.Translate (transform.up * Time.deltaTime * speed);
+//			rb.velocity = transform.up;
+			rb.AddForce (new Vector2(0.0f, Input.GetAxis("Vertical")) * speed * 10f);
+			if (isCharged)
+				anim.SetBool ("isCharged", true);
+			if (isSupra)
+				anim.SetBool ("isSupra", true);
+			anim.SetBool ("move", true);
+			anim.speed = Mathf.Abs(rb.velocity.y);
+		}
+		if (Input.GetAxis ("Horizontal") != 0.0f)
+		{
+			//			transform.Translate (transform.up * Time.deltaTime * speed);
+			//			rb.velocity = transform.up;
+			rb.AddForce (new Vector2(Input.GetAxis("Horizontal"), 0.0f) * speed * 10f);
+			if (isCharged)
+				anim.SetBool ("isCharged", true);
+			if (isSupra)
+				anim.SetBool ("isSupra", true);
+			anim.SetBool ("move", true);
+			anim.speed = Mathf.Abs(rb.velocity.x);
+			transform.localScale = new Vector3 (localScale.x * Mathf.Sign(Input.GetAxis("Horizontal")), localScale.y, localScale.z);
+		}
 		if (Input.GetKey (KeyCode.UpArrow))
 		{
-			transform.Translate (transform.up * Time.deltaTime * speed);
-			rb.velocity = transform.up;
+//			transform.Translate (transform.up * Time.deltaTime * speed);
+//			rb.velocity = transform.up;
 			rb.AddForce (transform.up * speed);
 			if (isCharged)
 				anim.SetBool ("isCharged", true);
@@ -66,8 +90,8 @@ public class Player : MonoBehaviour {
 		}
 		if (Input.GetKey (KeyCode.DownArrow))
 		{
-			transform.Translate (-transform.up * Time.deltaTime * speed);
-			rb.velocity = -transform.up;
+//			transform.Translate (-transform.up * Time.deltaTime * speed);
+//			rb.velocity = -transform.up;
 			rb.AddForce (-transform.up * speed);
 			if (isCharged)
 				anim.SetBool ("isCharged", true);
@@ -78,8 +102,8 @@ public class Player : MonoBehaviour {
 		}
 		if (Input.GetKey (KeyCode.LeftArrow))
 		{
-			transform.Translate (-transform.right * Time.deltaTime * speed);
-			rb.velocity = -transform.right;
+//			transform.Translate (-transform.right * Time.deltaTime * speed);
+//			rb.velocity = -transform.right;
 			rb.AddForce (-transform.right * speed);
 			if (isCharged)
 				anim.SetBool ("isCharged", true);
@@ -91,8 +115,8 @@ public class Player : MonoBehaviour {
 		}
 		if (Input.GetKey (KeyCode.RightArrow))
 		{
-			transform.Translate (transform.right * Time.deltaTime * speed);
-			rb.velocity = transform.right;
+//			transform.Translate (transform.right * Time.deltaTime * speed);
+//			rb.velocity = transform.right;
 			rb.AddForce (transform.right * speed);
 			if (isCharged)
 				anim.SetBool ("isCharged", true);
@@ -102,7 +126,7 @@ public class Player : MonoBehaviour {
 			transform.localScale = localScale;
 			anim.speed = Mathf.Abs(rb.velocity.x * speed);
 		}
-		if (!Input.GetKey (KeyCode.RightArrow) && !Input.GetKey (KeyCode.LeftArrow) && !Input.GetKey (KeyCode.UpArrow) && !Input.GetKey (KeyCode.DownArrow))
+		if (!Input.GetKey (KeyCode.RightArrow) && !Input.GetKey (KeyCode.LeftArrow) && !Input.GetKey (KeyCode.UpArrow) && !Input.GetKey (KeyCode.DownArrow) && Input.GetAxis("Vertical") == 0.0f && Input.GetAxis("Horizontal") == 0.0f)
 		{
 			anim.speed = 1f;
 			anim.SetBool ("move", false);
