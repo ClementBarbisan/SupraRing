@@ -17,7 +17,7 @@ public class Exit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.E) && isInsideAndCharged)
+		if ((Input.GetKeyDown (KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button16)) && isInsideAndCharged)
 		{
 			currentPlayer.isCharged = false ;
             if (!audioSource.isPlaying)

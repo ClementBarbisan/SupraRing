@@ -19,12 +19,12 @@ public class Fridge : MonoBehaviour {
     // the player recieves the charge
     void Update () 
 	{
-		if ( Input.GetKeyDown(KeyCode.E) && playerInside)
+		if (Input.GetKeyDown (KeyCode.Joystick1Button0))
+			Debug.Log ("Push button");
+		if ( (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button16)) && playerInside)
 		{
 			currentPlayer.currentTemperature = 20f ;
 			currentPlayer.isSupra = true;
-			if ( !currentPlayer.isCharged )
-				currentPlayer.GetComponent<SpriteRenderer>().color = Color.cyan;
             if ( !activeAudio.isPlaying )
             {
                 activeAudio.PlayOneShot(coolingDown, 1.0f);
